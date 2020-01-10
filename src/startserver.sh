@@ -1,15 +1,18 @@
-#!/bin/sh
+#!/bin/bash
 
 set -euxo pipefail
 
 HOSTNAME=${1:?The first argument to this script should be the local hostname.}
 
+# Make sure the directory exists
+mkdir -p /wehe/ssl/
+
 # First, generate the certificates from certificate authority.
 python certGenerator.py \
    --destination=/wehe/ssl/ \
    --domain_name=${HOSTNAME} \
-   --root_key=/wehe/ssl/ca.key \
-   --root_cert=/wehe/ssl/ca.crt \
+   --root_key=${CA_KEY:-/wehe/ssl/ca.key} \
+   --root_cert=${CA_CERT:-/wehe/ssl/ca.crt} \
    --root_pass=wehepower2HjBqmhqF4
 
 # Now start two servers.
