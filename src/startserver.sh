@@ -4,7 +4,7 @@ set -euxo pipefail
 
 HOSTNAME=${1:?The first argument to this script should be the local hostname.}
 
-# Make sure the directory exists
+# Make sure the directory exists before we start.
 mkdir -p /wehe/ssl/
 
 # First, generate the certificates from certificate authority.
